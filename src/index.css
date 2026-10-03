@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --bg-page: #F8FAFC;
+    --bg-card: #FFFFFF;
+    --bg-card-hover: #F1F5F9;
+    --border-card: #E2E8F0;
+    --text-primary: #0F172A;
+    --text-secondary: #475569;
+    --text-muted: #64748B;
+    
+    /* Primary brand: Indigo */
+    --color-primary: #4F46E5;
+    --color-primary-hover: #4338CA;
+    --color-primary-subtle: #EEF2FF;
+    
+    /* Semantic */
+    --color-income: #10B981;
+    --color-expense: #EF4444;
+    --color-warning: #F59E0B;
+    --color-investment: #3B82F6;
+    --color-networth: #6366F1;
+
+    /* Recharts Light Tokens */
+    --chart-grid: #E2E8F0;
+    --chart-axis: #64748B;
+    --chart-tooltip-bg: #FFFFFF;
+    --chart-tooltip-border: #CBD5E1;
+    --chart-tooltip-text: #0F172A;
+  }
+
+  .dark {
+    --bg-page: #0B0F19;
+    --bg-card: #111827;
+    --bg-card-hover: #1F2937;
+    --border-card: #1F2937;
+    --text-primary: #F9FAFB;
+    --text-secondary: #D1D5DB;
+    --text-muted: #9CA3AF;
+
+    /* Primary brand: Indigo (slightly brighter in dark mode) */
+    --color-primary: #6366F1;
+    --color-primary-hover: #4F46E5;
+    --color-primary-subtle: #1E1B4B;
+
+    /* Semantic (brighter in dark mode for contrast) */
+    --color-income: #34D399;
+    --color-expense: #F87171;
+    --color-warning: #FBBF24;
+    --color-investment: #60A5FA;
+    --color-networth: #818CF8;
+
+    /* Recharts Dark Tokens */
+    --chart-grid: #1F2937;
+    --chart-axis: #9CA3AF;
+    --chart-tooltip-bg: #111827;
+    --chart-tooltip-border: #374151;
+    --chart-tooltip-text: #F9FAFB;
+  }
+
+  body {
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    transition: background-color 150ms ease, color 150ms ease;
+    min-height: 100vh;
+  }
+}
+
+/* Tabular numbers for financial precision */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Smooth transition utility */
+.transition-smooth {
+  transition: all 180ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+.animate-shake {
+  animation: shake 0.4s ease-in-out;
+}
+

@@ -1,0 +1,174 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User account profile information from Google Sign-In",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "Unique Firebase Authentication UID"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "User email address"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User display name"
+        },
+        "photoURL": {
+          "type": "string",
+          "description": "Profile picture URL"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the account was first initialized"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the profile was last updated"
+        }
+      },
+      "required": ["uid", "email"]
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "Financial cash flow transaction item (income, expense, or investment)",
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "description": "Transaction date in YYYY-MM-DD format"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["income", "expense", "investment"],
+          "description": "Transaction flow category"
+        },
+        "category": {
+          "type": "string",
+          "description": "Categorization name"
+        },
+        "amount": {
+          "type": "number",
+          "description": "Monetary value in Rupiah"
+        },
+        "note": {
+          "type": "string",
+          "description": "Optional notes or details for the transaction"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the transaction was created"
+        },
+        "userId": {
+          "type": "string",
+          "description": "Owner UID who recorded this transaction"
+        }
+      },
+      "required": ["date", "type", "category", "amount"]
+    },
+    "UserSettings": {
+      "title": "UserSettings",
+      "description": "User personalized financial settings, targets, and EWS thresholds",
+      "type": "object",
+      "properties": {
+        "emergencyFundMonthsTarget": {
+          "type": "number",
+          "description": "Target emergency fund in months"
+        },
+        "currentEmergencyFund": {
+          "type": "number",
+          "description": "Current accumulated liquid cash fund in Rupiah"
+        },
+        "riskProfile": {
+          "type": "string",
+          "enum": ["konservatif", "moderat", "agresif"],
+          "description": "Investment risk appetite"
+        },
+        "monthlyInvestmentTarget": {
+          "type": "number",
+          "description": "Monthly routine investment allocation in Rupiah"
+        },
+        "annualExpectedReturn": {
+          "type": "number",
+          "description": "Expected annual portfolio return percentage"
+        },
+        "annualInflation": {
+          "type": "number",
+          "description": "Estimated annual inflation percentage"
+        },
+        "currentPortfolioValue": {
+          "type": "number",
+          "description": "Current total portfolio value in Rupiah"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update timestamp"
+        }
+      },
+      "required": ["emergencyFundMonthsTarget", "riskProfile"]
+    },
+    "AiInsight": {
+      "title": "AiInsight",
+      "description": "Saved AI Financial Advisor reports and recommendations",
+      "type": "object",
+      "properties": {
+        "financialScore": {
+          "type": "number",
+          "description": "Overall financial score 0-100"
+        },
+        "executiveSummary": {
+          "type": "string",
+          "description": "Executive summary paragraph"
+        },
+        "cashFlowAnalysis": {
+          "type": "string",
+          "description": "In-depth cash flow analysis"
+        },
+        "investmentStrategy": {
+          "type": "string",
+          "description": "Asset allocation and investment strategy"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the insight was generated"
+        }
+      },
+      "required": ["financialScore", "executiveSummary"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": {
+        "$ref": "#/entities/UserProfile"
+      },
+      "description": "User profile collection containing authenticated user metadata"
+    },
+    "/users/{userId}/transactions/{transactionId}": {
+      "schema": {
+        "$ref": "#/entities/Transaction"
+      },
+      "description": "Subcollection storing private financial transactions of the user"
+    },
+    "/users/{userId}/settings/{settingId}": {
+      "schema": {
+        "$ref": "#/entities/UserSettings"
+      },
+      "description": "Subcollection storing financial settings and budgets of the user"
+    },
+    "/users/{userId}/ai_insights/{insightId}": {
+      "schema": {
+        "$ref": "#/entities/AiInsight"
+      },
+      "description": "Subcollection storing historical AI recommendations and insights"
+    }
+  }
+}

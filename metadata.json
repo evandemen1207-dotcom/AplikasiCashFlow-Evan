@@ -1,0 +1,7 @@
+{
+  "name": "Cash Flow Pribadi",
+  "description": "Aplikasi pelacak arus kas pribadi, kalkulator investasi, proyeksi kemandirian finansial, dan Early Warning System (EWS).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
